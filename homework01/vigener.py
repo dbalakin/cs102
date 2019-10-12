@@ -1,56 +1,52 @@
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
-        >>> encrypt_vigenere("PYTHON", "A")
-        'PYTHON'
-        >>> encrypt_vigenere("python", "a")
-        'python'
-        >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
-        'LXFOPVEFRNHR'
-        """
-    # PUT YOUR CODE HERE
+    >>> encrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> encrypt_vigenere("python", "a")
+    'python'
+    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
+    'LXFOPVEFRNHR'
+    """
     ciphertext = ""
     keyword *= len(plaintext) // len(keyword) + 1
-    for i, j in enumerate(plaintext):
-        if 65 <= ord(j) <= 90:
-            if (ord(keyword[i]) - 65) + ord(j) > 90:
-                ciphertext += chr((ord(keyword[i]) - 65) + ord(j)-26)
+    for i, pl in enumerate(plaintext):
+        if "A" <= pl <= "Z":
+            if (ord(keyword[i]) - ord("A")) + ord(pl) > ord("Z"):
+                ciphertext += chr((ord(keyword[i]) - ord("A")) + ord(pl)-26)
             else:
-                ciphertext += chr((ord(keyword[i]) - 65) + ord(j))
-
-        elif 97 <= ord(j) <= 122:
-                if (ord(keyword[i]) - 97) + ord(j) > 122:
-                    ciphertext  += chr(((ord(keyword[i]) - 97) + ord(j) - 26))
-                else:
-                    ciphertext += chr((ord(keyword[i]) - 97) + ord(j))
+                ciphertext += chr((ord(keyword[i]) - ord("A")) + ord(pl))
+        elif "a" <= pl <= "z":
+            if (ord(keyword[i]) - ord("a")) + ord(j) > ord("z"):
+                ciphertext  += chr(((ord(keyword[i]) - ord("a")) + ord(pl) - 26))
+            else:
+                ciphertext += chr((ord(keyword[i]) - ord("a")) + ord(pl))
         else:
-            ciphertext += j
-    return
+            ciphertext += pl
+    return ciphertext
 
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
-        >>> decrypt_vigenere("PYTHON", "A")
-        'PYTHON'
-        >>> decrypt_vigenere("python", "a")
-        'python'
-        >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
-        'ATTACKATDAWN'
-        """
-    # PUT YOUR CODE HERE
+    >>> decrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> decrypt_vigenere("python", "a")
+    'python'
+    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
+    'ATTACKATDAWN'
+    """
     plaintext = ""
     keyword *= len(ciphertext) // len(keyword) + 1
-    for i, j in enumerate(ciphertext):
-        if 65 <= ord(j) <= 90:
-            if (ord(j) - (ord(keyword[i]) - 65)) < 65:
-                plaintext += chr(ord(j)-(ord(keyword[i]) - 65) + 26)
+    for i, ci in enumerate(ciphertext):
+        if "A" <= ci <= "Z":
+            if (ord(ci) - (ord(keyword[i]) - ord("A"))) < ord("A"):
+                plaintext += chr(ord(ci)-(ord(keyword[i]) - ord("A")) + 26)
             else:
-                plaintext += chr(ord(j) - (ord(keyword[i]) - 65))
-        elif 97 <= ord(j) <= 122:
-                if (ord(j) - (ord(keyword[i]) - 97)) < 97:
-                    plaintext += chr((ord(j) - (ord(keyword[i]) - 97) + 26))
-                else:
-                    plaintext += chr(ord(j) - (ord(keyword[i]) - 97))
+                plaintext += chr(ord(ci) - (ord(keyword[i]) - ord("A")))
+        elif "a" <= ord(ci) <= "z":
+            if (ord(ci) - (ord(keyword[i]) - ord("a"))) < ord("a"):
+                plaintext += chr((ord(ci) - (ord(keyword[i]) - ord("a")) + 26))
+            else:
+                plaintext += chr(ord(ci) - (ord(keyword[i]) - ord("a")))
         else:
-            plaintext += j
-
+            plaintext += ci
     return plaintext
