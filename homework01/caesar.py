@@ -1,11 +1,13 @@
 def encrypt_caesar(plaintext: str) -> str:
     """
-    >>> encrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> encrypt_vigenere("python", "a")
-    'python'
-    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
-    'LXFOPVEFRNHR'
+    >>> encrypt_caesar("PYTHON")
+    'SBWKRQ'
+    >>> encrypt_caesar("python")
+    'sbwkrq'
+    >>> encrypt_caesar("Python3.6")
+    'Sbwkrq3.6'
+    >>> encrypt_caesar("")
+    ''
     """
     ciphertext = ""
     for ch in plaintext:
@@ -26,12 +28,14 @@ def encrypt_caesar(plaintext: str) -> str:
 
 def decrypt_caesar(ciphertext: str) -> str:
     """
-    >>> decrypt_vigenere("PYTHON", "A")
+    >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
-    >>> decrypt_vigenere("python", "a")
+    >>> decrypt_caesar("sbwkrq")
     'python'
-    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
-    'ATTACKATDAWN'
+    >>> decrypt_caesar("Sbwkrq3.6")
+    'Python3.6'
+    >>> decrypt_caesar("")
+    ''
     """
     plaintext = ""
     for ch in ciphertext:
@@ -46,5 +50,5 @@ def decrypt_caesar(ciphertext: str) -> str:
             else:
                 plaintext += chr(ch - 3)
         else:
-            plaintext += i
+            plaintext += ch
     return plaintext
