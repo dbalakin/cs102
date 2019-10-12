@@ -40,7 +40,7 @@ def decrypt_caesar(ciphertext: str) -> str:
                 plaintext += chr(ch - 3 + 26)
             else:
                 plaintext += chr(ch - 3)
-        elif 97 <= ord(i) <= 122:
+        elif "a" <= ch <= "z":
             if ch - 3 < "a":
                 plaintext += chr(ch - 3 + 26)
             else:
