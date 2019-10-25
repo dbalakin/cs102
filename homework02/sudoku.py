@@ -40,11 +40,6 @@ def group(values: List[str], n: int) -> List[List[str]]:
         bigbox.append(smallbox)
     return [values[i:i+n] for i in range(0, len(values), n)]
 
-grid = read_sudoku('puzzle1.txt')
-from pprint import pprint as pp
-pp(grid)
-display(grid)
-
 
 def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     """ Возвращает все значения для номера строки, указанной в pos
@@ -203,5 +198,5 @@ def generate_sudoku(N: int) -> List[List[str]]:
             grid[row][col] = '.'
             N -= 1
     return grid
-exit()
+
 
