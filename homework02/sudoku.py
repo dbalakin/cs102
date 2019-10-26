@@ -38,7 +38,7 @@ def group(values: List[str], n: int) -> List[List[str]]:
             smallbox.append(values[i])
             i += 1
         bigbox.append(smallbox)
-    return [values[i:i+n] for i in range(0, len(values), n)]
+    return bigbox
 
 
 def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
@@ -108,16 +108,10 @@ def find_possible_values(grid: List[List[str]], pos: Tuple[int, int]) -> Set[str
     >>> values == {'2', '5', '9'}
     True
     """
-    true_elem = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
-    for rep_element in true_elem.copy():
-        if rep_element in get_row(grid, pos):
-            true_elem.discard(rep_element)
-        elif rep_element in get_col(grid, pos):
-            true_elem.discard(rep_element)
-        elif rep_element in get_block(grid, pos):
-            true_elem.discard(rep_element)
-        else:
-            continue
+    true_elem = {}
+    for i in range(1,10):
+        true_elem.append(i)
+    true_elem = true_elem - set(get_row(grid, pos)) - set(get_col(grid, pos)) - set(get_block(grid, pos)
     return true_elem
 
 
@@ -200,3 +194,12 @@ def generate_sudoku(N: int) -> List[List[str]]:
     return grid
 
 
+if __name__ == '__main__':
+    for fname in ['puzzle1.txt', 'puzzle2.txt', 'puzzle3.txt']:
+        grid = read_sudoku(fname)
+        display(grid)
+        solution = solve(grid)
+        if not solution:
+            print(f"Puzzle {fname} can't be solved")
+        else:
+            display(solution)
