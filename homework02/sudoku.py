@@ -108,11 +108,9 @@ def find_possible_values(grid: List[List[str]], pos: Tuple[int, int]) -> Set[str
     >>> values == {'2', '5', '9'}
     True
     """
-    true_elem = {}
-    for i in range(1,10):
-        true_elem.append(i)
-    true_elem = true_elem - set(get_row(grid, pos)) - set(get_col(grid, pos)) - set(get_block(grid, pos)
-    return true_elem
+    true_elem = set('123456789')
+    return true_elem - set(get_block(grid, pos)) - \
+           set(get_col(grid, pos)) - set(get_row(grid, pos))
 
 
 def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
@@ -184,13 +182,13 @@ def generate_sudoku(N: int) -> List[List[str]]:
     True
     """
     grid = solve([['.'] * 9 for _ in range(9)])
-    N = 81 - min(81, max(0, N))
-    while N:
-        row = random.randint(0, 8)
-        col = random.randint(0, 8)
-        if grid[row][col] != '.':
-            grid[row][col] = '.'
-            N -= 1
+    DotCount = 81 - N
+    while DotCount > 0:
+        r = random.randint(0, 8)
+        c = random.randint(0, 8)
+        if grid[r][c] != '.':
+            grid[r][c] = '.'
+            DotCount -= 1
     return grid
 
 
