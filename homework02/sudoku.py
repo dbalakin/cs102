@@ -38,7 +38,7 @@ def group(values: List[str], n: int) -> List[List[str]]:
             smallbox.append(values[i])
             i += 1
         bigbox.append(smallbox)
-    return [values[i:i+n] for i in range(0, len(values), n)]
+    return bigbox
 
 
 def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
@@ -108,17 +108,9 @@ def find_possible_values(grid: List[List[str]], pos: Tuple[int, int]) -> Set[str
     >>> values == {'2', '5', '9'}
     True
     """
-    true_elem = {'1', '2', '3', '4', '5', '6', '7', '8', '9'}
-    for rep_element in true_elem.copy():
-        if rep_element in get_row(grid, pos):
-            true_elem.discard(rep_element)
-        elif rep_element in get_col(grid, pos):
-            true_elem.discard(rep_element)
-        elif rep_element in get_block(grid, pos):
-            true_elem.discard(rep_element)
-        else:
-            continue
-    return true_elem
+    true_elem = set('123456789')
+    return true_elem - set(get_block(grid, pos)) - \
+           set(get_col(grid, pos)) - set(get_row(grid, pos))
 
 
 def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
@@ -190,13 +182,22 @@ def generate_sudoku(N: int) -> List[List[str]]:
     True
     """
     grid = solve([['.'] * 9 for _ in range(9)])
-    N = 81 - min(81, max(0, N))
-    while N:
-        row = random.randint(0, 8)
-        col = random.randint(0, 8)
-        if grid[row][col] != '.':
-            grid[row][col] = '.'
-            N -= 1
+    DotCount = 81 - N
+    while DotCount > 0:
+        r = random.randint(0, 8)
+        c = random.randint(0, 8)
+        if grid[r][c] != '.':
+            grid[r][c] = '.'
+            DotCount -= 1
     return grid
 
 
+if __name__ == '__main__':
+    for fname in ['puzzle1.txt', 'puzzle2.txt', 'puzzle3.txt']:
+        grid = read_sudoku(fname)
+        display(grid)
+        solution = solve(grid)
+        if not solution:
+            print(f"Puzzle {fname} can't be solved")
+        else:
+            display(solution)
