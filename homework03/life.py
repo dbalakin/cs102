@@ -29,7 +29,6 @@ class GameOfLife:
         # Текущее число поколений
         self.generations = 1
 
-
     def create_grid(self, randomize: bool = False) -> Grid:
         # Copy from previous assignment
         if randomize:
@@ -37,7 +36,6 @@ class GameOfLife:
                     for _ in range(self.rows)]
         else:
             return [[0] * self.cols for _ in range(self.rows)]
-
 
     def get_neighbours(self, cell: Cell) -> Cells:
         # Copy from previous assignment
@@ -52,7 +50,6 @@ class GameOfLife:
                       col > -1 and col < self.cols):
                     cells.append(self.curr_generation[row][col])
         return cells
-
 
     def get_next_generation(self) -> Grid:
         # Copy from previous assignment
@@ -71,7 +68,6 @@ class GameOfLife:
                     new_grid[row][col] = 0
         return new_grid
 
-
     def step(self) -> None:
         """
         Выполнить один шаг игры.
@@ -80,17 +76,12 @@ class GameOfLife:
         self.curr_generation = self.get_next_generation()
         self.generations += 1
 
-
     @property
     def is_max_generations_exceeded(self) -> bool:
         """
         Не превысило ли текущее число поколений максимально допустимое.
         """
-        if self.generations >= self.max_generations:
-            return True
-        else:
-            return False
-
+        return self.generations > self.max_generations
 
     @property
     def is_changing(self) -> bool:
@@ -101,7 +92,6 @@ class GameOfLife:
             return False
         else:
             return True
-
 
     @staticmethod
     def from_file(filename: pathlib.Path) -> 'GameOfLife':
@@ -125,7 +115,6 @@ class GameOfLife:
         game = GameOfLife(size, True)
         game.curr_generation = grid
         return game
-
 
     def save(self, filename: pathlib.Path) -> None:
         """
