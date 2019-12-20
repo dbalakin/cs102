@@ -20,8 +20,7 @@ def get_network(all_ids, as_edgelist=True):
             if friend['id'] in all_ids:
                 sort_ids.append(ids)
                 break
-    
-    sort_ids = all_ids
+  
     vertices = list(range(len(sort_ids)))
     edges = set()
     for i in range(len(sort_ids)):
