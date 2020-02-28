@@ -50,7 +50,7 @@ def get_wall(
         url="https://api.vk.com/method/execute",
         data={
             "code": f'return API.wall.get({code});',
-            "access_token": '6c6aa007d12c53c74eb781bc26038708014e7a2aa27f285ad0bfa4fa11f6832612999ae3f734712895c4b',
+            "access_token": '21a6c8acbedc3090a9e642e7bc040a2696de8bd8e85715976d03b393a75d4cf91a898cbe8062a2efd320e',
             "v": v
         }
     )

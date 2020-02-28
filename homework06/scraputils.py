@@ -73,5 +73,3 @@ def get_news(url, n_pages=1):
         time.sleep(3)
     return news
 
-#news_list = get_news("https://news.ycombinator.com/", n_pages=1)
-#print(news_list)
