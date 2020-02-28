@@ -10,7 +10,10 @@ from homework05.api import get_friends, get_names
 
 def get_network(all_ids, as_edgelist=True):
     """ Building a friend graph for an arbitrary list of users """
+<<<<<<< HEAD
     # Исключаем людей, которые не имеют общих друзей
+=======
+>>>>>>> 722fba8cef4d37da7a8480c6d5b4d02ed9132797
     sort_ids = []
     for ids in all_ids:
         try:
@@ -21,7 +24,11 @@ def get_network(all_ids, as_edgelist=True):
             if friend['id'] in all_ids:
                 sort_ids.append(ids)
                 break
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 722fba8cef4d37da7a8480c6d5b4d02ed9132797
     vertices = list(range(len(sort_ids)))
     edges = set()
     for i in range(len(sort_ids)):
