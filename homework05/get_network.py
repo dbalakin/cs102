@@ -10,44 +10,6 @@ from homework05.api import get_friends, get_names
 
 def get_network(all_ids, as_edgelist=True):
     """ Building a friend graph for an arbitrary list of users """
-<<<<<<< HEAD
-    # Исключаем людей, которые не имеют общих друзей
-=======
->>>>>>> 722fba8cef4d37da7a8480c6d5b4d02ed9132797
-    sort_ids = []
-    for ids in all_ids:
-        try:
-            id_friends = get_friends(ids, 'first_name')['response']['items']
-        except KeyError:
-            continue
-        for friend in id_friends:
-            if friend['id'] in all_ids:
-                sort_ids.append(ids)
-                break
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 722fba8cef4d37da7a8480c6d5b4d02ed9132797
-    vertices = list(range(len(sort_ids)))
-    edges = set()
-    for i in range(len(sort_ids)):
-        try:
-            id_friends = get_friends(sort_ids[i], 'first_name')['response']['items']
-        except KeyError:
-            continue
-        for user in id_friends:
-            if user['id'] in sort_ids:
-                j = sort_ids.index(user['id'])
-                edges.add((i, j))
-    edges = list(edges)
-    if as_edgelist:
-        return vertices, edges
-    else:
-        matrix = [[0 for _ in vertices] for _ in vertices]
-        for edge in edges:
-            matrix[edge[0]][edge[1]] = 1
-        return matrix
 
 
 def plot_graph(vertices, edges):

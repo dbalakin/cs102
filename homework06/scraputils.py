@@ -55,7 +55,6 @@ def extract_next_page(parser):
     except TypeError:
         return None
     return next_page
-        
 
 
 def get_news(url, n_pages=1):
@@ -72,4 +71,16 @@ def get_news(url, n_pages=1):
         n_pages -= 1
         time.sleep(3)
     return news
+
+n = get_news(url = "https://news.ycombinator.com/", n_pages= 2)
+print(n)
+
+
+
+
+
+
+
+
+
 
